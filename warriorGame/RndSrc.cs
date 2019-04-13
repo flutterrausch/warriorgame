@@ -1,14 +1,15 @@
 ﻿using System;
+
 namespace warriorGame
 {
 	// TODO whole class static any useful? new Random in Constructor?
 	public class RndSrc
 	{
-		private static Random _rnd = new Random();  // TODO Randomize?
+		private static readonly Random _rnd=new Random();  // TODO Randomize?
 
 
 		public static double GetRnd(int max)  // TODO property get
-		{ 
+		{
 			return _rnd.Next(max);
 		}
 
@@ -28,6 +29,5 @@ namespace warriorGame
 				
 			return rndVaried;
 		}
-
 	}
 }
