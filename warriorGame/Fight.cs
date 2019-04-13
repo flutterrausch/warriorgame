@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace warriorGame
 {
-    public class Fight
+    public static class Fight
     {
         // utility class, only static methods
         
@@ -21,7 +21,7 @@ namespace warriorGame
             return (fighter0.health > 0f && fighter1.health > 0f); // both survived?
         }
 
-        public static void FightOneWay(Human fighter0, Human fighter1)
+        private static void FightOneWay(Human fighter0, Human fighter1)
         {
             // fighter0 attacks fighter1
             double attack = RndSrc.RndVary(fighter0.attackMax, 30, 100);

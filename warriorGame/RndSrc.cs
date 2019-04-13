@@ -2,13 +2,12 @@
 
 namespace warriorGame
 {
-	// TODO whole class static any useful? new Random in Constructor?
-	public class RndSrc
+	public static class RndSrc
 	{
-		private static readonly Random _rnd=new Random();  // TODO Randomize?
+		private static readonly Random _rnd=new Random();  // TODO Randomize/Constructor?
 
 
-		public static double GetRnd(int max)  // TODO property get
+		public static double GetRnd(int max)
 		{
 			return _rnd.Next(max);
 		}
