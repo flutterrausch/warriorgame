@@ -12,6 +12,18 @@ namespace warriorGame
         // IHealth
         public double health { get; set; }
 
+        public string getHealthBar()
+        {
+            const int total = 30;
+
+            double count = Math.Round(((double)health / 100f) * total);
+            // if (count == 0  &&  Alive())  count = 1;
+            string bar = "[";
+            for (int i = 0; i < count; i++)  bar += "#";
+
+            return bar.PadRight(total + 1) + "]";
+        }
+
         
         // Human
         public string name { get; }

@@ -32,8 +32,9 @@ namespace warriorGame
             fighter1.health -= 2f; // fighting exhausts, max 50 moves
             if (fighter1.health < 0) fighter1.health = 0;  // TODO check within Property (performance..)?
 
-            Console.WriteLine("{0} attack={1:0}  {2} block={3:0} damage={4:0} health={5:0}",
-                fighter0.name, attack, fighter1.name, block, damage, fighter1.health);
+            Console.WriteLine("{0} attack={1:0}  {2} block={3:0} damage={4:0}",
+                fighter0.name, attack, fighter1.name, block, damage);
+            Console.WriteLine(fighter1.name + " " + fighter1.getHealthBar());  // attackee
         }
 
         public static string WhoSurvived(List<IFightable> fighters)
