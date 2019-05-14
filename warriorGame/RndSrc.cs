@@ -4,10 +4,10 @@ namespace warriorGame
 {
 	public static class RndSrc
 	{
-		private static readonly Random _rnd=new Random();  // TODO Randomize/Constructor?
+		private static readonly Random _rnd = new Random();  // TODO Randomize/Constructor?
 
 
-		public static double GetRnd(int max)
+		private static double GetRnd(int max)
 		{
 			return _rnd.Next(max);
 		}

@@ -7,9 +7,11 @@ namespace warriorGame
 		static void Main(string[] args)
 		{
 			// create fighters
+			Human f0 = new Human("f0");
+			Human f1 = new Human("f1");
 			List<IFightable> fighters = new List<IFightable>();
-			Human f0 = new Human("f0"); fighters.Add(f0);
-			Human f1 = new Human("f1"); fighters.Add(f1);
+			fighters.Add(f0);
+			fighters.Add(f1);
 			
 			GameLoop gameLoop = new GameLoop();
 			gameLoop.Start(fighters);
