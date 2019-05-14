@@ -16,12 +16,11 @@ namespace warriorGame
         {
             const int total = 30;
 
-            double count = Math.Round(((double)health / 100f) * total);
-            // if (count == 0  &&  Alive())  count = 1;
-            string bar = "[";
-            for (int i = 0; i < count; i++)  bar += "#";
-
-            return bar.PadRight(total + 1) + "]";
+            int count = (int) Math.Round(health * (double) total / 100f);
+            string bar = "[" + new String('#', count);
+            bar = bar.PadRight(total + 1) + "]";
+            
+            return bar;
         }
 
         
