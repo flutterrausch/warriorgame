@@ -16,8 +16,8 @@ namespace warriorGame
         {
             const int total = 30;
 
-            int count = (int) Math.Round(health * (double) total / 100f);
-            string bar = "[" + new String('#', count);
+            int count = (int) Math.Round(health * (double) total / 100d);
+            string bar = "[" + new string('#', count);
             bar = bar.PadRight(total + 1) + "]";
             
             return bar;
@@ -30,9 +30,10 @@ namespace warriorGame
         public Human(string _name)
         {
             name = _name;
+            health = 100f;
+            
             attackMax = RndSrc.RndVary(70, 25, 100);
             blockMax = RndSrc.RndVary(60, 25, 100); // give those attacks a chance
-            health = 100f;
         }
 
         public void Print()

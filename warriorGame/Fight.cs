@@ -5,7 +5,7 @@ namespace warriorGame
 {
     public static class Fight
     {
-        // utility class, only static methods
+        // utility class, only static methods  TODO considered harmful
         
         public static bool FightRound(List<IFightable> fighters)
         {
