@@ -17,7 +17,7 @@ namespace warriorGame
 		private bool _gameOn = true;
 
 
-		public void Start(List<IFightable> fighters)
+		public void Start(List<Species> fighters)
 		{
 			Fight.FightersPrint(fighters);
 

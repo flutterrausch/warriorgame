@@ -7,7 +7,7 @@ namespace warriorGame
 		static void Main()
 		{
 			// create fighters
-			List<IFightable> fighters = new List<IFightable>();
+			List<Species> fighters = new List<Species>();
 			fighters.Add(new Human("f0"));
 			fighters.Add(new Human("f1"));
 			

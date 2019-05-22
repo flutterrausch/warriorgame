@@ -7,7 +7,7 @@ namespace warriorGame
     {
         // utility class, only static methods  TODO considered harmful
         
-        public static bool FightRound(List<IFightable> fighters)
+        public static bool FightRound(List<Species> fighters)
         {
             Human fighter0 = fighters[0] as Human; // TODO sanity checks -> ConvertToHuman() incl sanity checks
             Human fighter1 = fighters[1] as Human;
@@ -37,7 +37,7 @@ namespace warriorGame
             Console.WriteLine(fighter1.name + " " + fighter1.getHealthBar());  // attackee
         }
 
-        public static string WhoSurvived(List<IFightable> fighters)
+        public static string WhoSurvived(List<Species> fighters)
         {
             string ret = "";
 
@@ -52,7 +52,7 @@ namespace warriorGame
             return ret;
         }
 
-        public static void FightersPrint(List<IFightable> fighters)
+        public static void FightersPrint(List<Species> fighters)
         {
             (fighters[0] as Human).Print(); // Print() is Human, TODO sanity checks
             (fighters[1] as Human).Print();

@@ -2,13 +2,8 @@
 
 namespace warriorGame
 {
-    public class Human : IFightable, IHealth
+    public class Human : Species, IHealth
     {
-        // IFightable
-        public double attackMax { get; }
-        public double blockMax { get; }
-
-
         // IHealth
         public double health { get; set; }
 
