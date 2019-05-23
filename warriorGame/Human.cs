@@ -2,24 +2,9 @@
 
 namespace warriorGame
 {
-    public class Human : Species, IHealth
+    public class Human : Species
     {
-        // IHealth
-        public double health { get; set; }
-
-        public string getHealthBar()
-        {
-            const int total = 30;
-
-            int count = (int) Math.Round(health * (double) total / 100d);
-            string bar = "[" + new string('#', count);
-            bar = bar.PadRight(total + 1) + "]";
-            
-            return bar;
-        }
-
-        
-        // Human
+        /// Human
         public string name { get; }
 
         public Human(string _name)
