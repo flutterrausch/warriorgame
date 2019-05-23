@@ -4,6 +4,21 @@ namespace warriorGame
 {
 	public class Species
 	{
+		/// misc
+		public string name { get; }
+
+		public Species(string _name)
+		{
+			name = _name;
+			health = 100f;
+		}
+
+		public void Print()
+		{
+			Console.WriteLine("{0} attackM={1:0} blockM={2:0} health={3:0}", name, attackMax, blockMax, health);
+		}
+
+		
 		/// health
 		public double health { get; set; }
 
