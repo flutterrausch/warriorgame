@@ -13,6 +13,10 @@ namespace warriorGame
 			fighters.Add(new Human("h1"));
 			fighters.Add(new Ork("o1"));
 			
+			Testos testos = new Testos();  // instance possible
+			//testos.FightersPrint(fighters); // cannot be accessed with an instance reference; qualify it with a type name instead
+			Testos.FightersPrint(fighters);
+				
 			GameLoop gameLoop = new GameLoop();
 			gameLoop.Start(fighters);
 		}

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace warriorGame
 {
-    public static class Fight
+    public class Fight
     {
         // utility class, only static methods  TODO considered harmful
         
