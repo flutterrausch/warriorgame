@@ -5,7 +5,7 @@ namespace warriorGame
 {
     public class Fight
     {
-        // utility class, only static methods  TODO considered harmful
+        // utility class, only static methods  TODO class not static - good enough?
         
         public static bool FightRound(List<Species> fighters)
         {
