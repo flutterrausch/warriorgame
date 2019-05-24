@@ -28,7 +28,7 @@ namespace warriorGame
             double block = RndSrc.RndVary(fighter1.blockMax, 30, 100);
             double damage = attack - block;
             if (damage < 0) damage = 0; // fighting can only decrease health
-            fighter1.health -= damage; // TODO design: write to health  vs  return IHealth.health/Human.health ?
+            fighter1.health -= damage; // TODO design: write to health  vs  return IHealth.health/Human.health (keep health protected?
             fighter1.health -= 2f; // fighting exhausts, max 50 moves
             if (fighter1.health < 0) fighter1.health = 0;  // TODO check within Property (performance..)?
 
