@@ -8,8 +8,10 @@ namespace warriorGame
 		{
 			// create fighters
 			List<Species> fighters = new List<Species>();
-			fighters.Add(new Human("f0"));
-			fighters.Add(new Human("f1"));
+			fighters.Add(new Human("h0"));
+			fighters.Add(new Ork("o0"));
+			fighters.Add(new Human("h1"));
+			fighters.Add(new Ork("o1"));
 			
 			GameLoop gameLoop = new GameLoop();
 			gameLoop.Start(fighters);

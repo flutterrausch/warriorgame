@@ -9,44 +9,37 @@ namespace warriorGame
         
         public static bool FightRound(List<Species> fighters)
         {
-            Human fighter0 = fighters[0] as Human; // TODO sanity checks -> ConvertToHuman() incl sanity checks
-            Human fighter1 = fighters[1] as Human;
-
-            FightOneWay(fighter0, fighter1);
-            if (fighter1.health > 0f) // fight back only when still alive - attack is the best form of defense
+            FightOneWay(fighters[0], fighters[1]);
+            if (fighters[0].health > 0f) // fight back only when still alive - attack is the best form of defense
             {
-                FightOneWay(fighter1, fighter0);
+                FightOneWay(fighters[1], fighters[0]);
             }
 
-            return (fighter0.health > 0f && fighter1.health > 0f); // both survived?
+            return (fighters[0].health > 0f && fighters[1].health > 0f); // both survived?
         }
 
-        private static void FightOneWay(Human fighter0, Human fighter1)
+        private static void FightOneWay(Species attacker, Species blocker)
         {
-            // fighter0 attacks fighter1
-            double attack = RndSrc.RndVary(fighter0.attackMax, 30, 100);
-            double block = RndSrc.RndVary(fighter1.blockMax, 30, 100);
+            double attack = RndSrc.RndVary(attacker.attackMax, 30, 100);
+            double block = RndSrc.RndVary(blocker.blockMax, 30, 100);
             double damage = attack - block;
             if (damage < 0) damage = 0; // fighting can only decrease health
-            fighter1.health -= damage; // TODO design: write to health  vs  return IHealth.health/Human.health (keep health protected?
-            fighter1.health -= 2f; // fighting exhausts, max 50 moves
-            if (fighter1.health < 0) fighter1.health = 0;  // TODO check within Property (performance..)?
+            blocker.health -= damage; // TODO design: write to health  vs  return IHealth.health/Human.health (keep health protected?
+            blocker.health -= 2f; // fighting exhausts, max 50 moves
+            if (blocker.health < 0) blocker.health = 0;  // TODO check within Property (performance..)?
 
             Console.WriteLine("{0} attack={1:0}  {2} block={3:0} damage={4:0}",
-                fighter0.name, attack, fighter1.name, block, damage);
-            Console.WriteLine(fighter1.name + " " + fighter1.getHealthBar());  // attackee
+                attacker.name, attack, blocker.name, block, damage);
+            Console.WriteLine(blocker.name + " " + blocker.getHealthBar());
         }
 
         public static string WhoSurvived(List<Species> fighters)
         {
             string ret = "";
 
-            Human fighter0 = fighters[0] as Human; // TODO sanity checks
-            Human fighter1 = fighters[1] as Human;
-
             // at least one is dead after a fight is over (end of gameLoop)
-            if (fighter0.health > 0) ret += fighter0.name;
-            if (fighter1.health > 0) ret += fighter1.name;
+            if (fighters[0].health > 0) ret += fighters[0].name; // TODO sanity checks
+            if (fighters[1].health > 0) ret += fighters[1].name;
             if (ret == "") ret = "nobody";
 
             return ret;
@@ -54,8 +47,8 @@ namespace warriorGame
 
         public static void FightersPrint(List<Species> fighters)
         {
-            (fighters[0] as Human).Print(); // Print() is Human, TODO sanity checks
-            (fighters[1] as Human).Print();
+            fighters[0].Print(); // TODO sanity checks
+            fighters[1].Print();
         }
     }
 }
