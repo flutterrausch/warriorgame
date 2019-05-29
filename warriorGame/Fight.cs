@@ -20,8 +20,8 @@ namespace warriorGame
 
         private static void FightOneWay(Species attacker, Species blocker)
         {
-            double attack = RndSrc.RndVary(attacker.attackMax, 30, 100);
-            double block = RndSrc.RndVary(blocker.blockMax, 30, 100);
+            double attack = RndSrc.Vary(attacker.attackMax, 30, 100);
+            double block = RndSrc.Vary(blocker.blockMax, 30, 100);
             double damage = attack - block;
             if (damage < 0) damage = 0; // fighting can only decrease health
             blocker.health -= damage; // TODO design: write to health  vs  return IHealth.health/Human.health (keep health protected?

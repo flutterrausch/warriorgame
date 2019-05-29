@@ -17,15 +17,17 @@ namespace warriorGame
 		private bool _gameOn = true;
 
 
-		public void Start(List<Species> fighters)
+		public void Start(List<Species> fighters)  // TODO fight rounds only, need enclosing game rounds
 		{
-			Fight.FightersPrint(fighters);
+			List<Species> pair = RndSrc.PairFromList(ref fighters);
+			Fight.FightersPrint(pair);
 
 			uint round = 1;
 			while (_gameOn)
 			{
 				Console.WriteLine(Environment.NewLine + "round " + round);
-				_gameOn &= Fight.FightRound(fighters);
+
+				_gameOn &= Fight.FightRound(pair);
 				//_gameOn &= Health.RecoverRound(fighters);
 
 				if (++round > 100)  break;
