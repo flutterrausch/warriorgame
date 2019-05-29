@@ -19,7 +19,7 @@ namespace warriorGame
 
 		public void Start(List<Species> fighters)  // TODO fight rounds only, need enclosing game rounds
 		{
-			List<Species> pair = RndSrc.PairFromList(ref fighters);
+			List<Species> pair = RndSrc.PairFromList(ref fighters);  // TODO sanity check here (or exception in method)
 			Fight.FightersPrint(pair);
 
 			uint round = 1;
@@ -33,7 +33,7 @@ namespace warriorGame
 				if (++round > 100)  break;
 			}
 
-			Console.WriteLine(Environment.NewLine + "Game Over, " + Fight.WhoSurvived(fighters) + " won.");
+			Console.WriteLine(Environment.NewLine + "Game Over, " + Fight.WhoSurvived(pair) + " won.");
 		}
 	}
 }
