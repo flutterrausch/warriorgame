@@ -33,22 +33,33 @@ namespace warriorGame
             Console.WriteLine(blocker.name + " " + blocker.getHealthBar());
         }
 
-        public static string WhoSurvived(List<Species> fighters)
+        public static Species WhoSurvived(List<Species> fighters)
         {
-            string ret = "";
+            Species ret = null;
 
-            // at least one is dead after a fight is over (end of gameLoop)
-            if (fighters[0].health > 0) ret += fighters[0].name; // TODO sanity checks
-            if (fighters[1].health > 0) ret += fighters[1].name;
-            if (ret == "") ret = "nobody";
+            // at least one is dead after a fight is over (end of fightLoop)
+            if (fighters[0].health > 0)
+                ret = fighters[0];
+            else if (fighters[1].health > 0)
+                ret = fighters[1];
 
             return ret;
         }
 
+        public static string GetSurvivedName(Species fighter)
+        {
+            if (fighter != null)
+                return fighter.name;
+            else
+                return "nobody";
+        }
+
         public static void FightersPrint(List<Species> fighters)
         {
-            fighters[0].Print(); // TODO sanity checks
-            fighters[1].Print();
+            foreach (Species fighter in fighters)
+            {
+                fighter.Print();
+            }
         }
     }
 }
