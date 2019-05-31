@@ -54,8 +54,9 @@ namespace warriorGame
                 return "nobody";
         }
 
-        public static void FightersPrint(List<Species> fighters)
+        public static void FightersPrint(string title, List<Species> fighters)
         {
+            Console.WriteLine(title);
             foreach (Species fighter in fighters)
             {
                 fighter.Print();
