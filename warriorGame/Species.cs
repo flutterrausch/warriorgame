@@ -7,9 +7,9 @@ namespace warriorGame
 		/// misc
 		public string name { get; }
 
-		public Species(string _name)
+		public Species(string nameArg)
 		{
-			name = _name;
+			name = nameArg;
 			health = 100f;
 		}
 
@@ -20,7 +20,7 @@ namespace warriorGame
 
 		
 		/// health
-		public double health { get; set; }  // TODO protected?! Fight class usage..
+		public double  health { get; set; }  // TODO protected?! Fight class usage..
 
 		public string getHealthBar()
 		{

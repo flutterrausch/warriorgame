@@ -1,14 +1,57 @@
 using System;
+using static System.Environment;
 using System.Collections.Generic;
 
 namespace warriorGame
 {
     public class Fight
     {
-        // utility class, only static methods  TODO class not static - good enough?
+        private static uint _fightCnt = 0;
+
         
-        public static bool FightRound(List<Species> fighters)
+        // utility class, mostly static methods  TODO class not static - good enough?
+        
+        public static bool FullFight(ref List<Species> fighters)
         {
+            List<Species> pair;
+            Species survivor;
+            uint fightRound = 1;
+            bool fightOn = true;
+            bool retGameOn = true;
+            
+            Console.WriteLine("Fight No " + ++_fightCnt);
+            FightersPrint("all fighters:", fighters);
+
+            pair = RndSrc.PairFromList(ref fighters);  // TODO sanity check here (or exception in method)
+            FightersPrint("upcoming fight pair:", pair);
+
+            while (fightOn)
+            {
+                fightOn &= FightRound(pair, fightRound);
+                fightOn &= (++fightRound < 100);
+                
+                //fightOn &= Health.RecoverRound(fighters);
+            }
+
+            survivor = WhoSurvived(pair);
+            if (survivor != null)
+            {
+                survivor.health = 100d;
+                fighters.Add(survivor);
+            }
+            else
+            {
+                retGameOn = false;
+            }
+            Console.WriteLine(NewLine + "Fight Over, " + GetSurvivedName(survivor) + " won." + NewLine);
+            
+            return retGameOn;
+        }
+
+        
+       public static bool FightRound(List<Species> fighters, uint fightRound)
+        {
+            Console.WriteLine(NewLine + "fight round " + fightRound);
             FightOneWay(fighters[0], fighters[1]);
             if (fighters[0].health > 0f) // fight back only when still alive - attack is the best form of defense
             {
@@ -28,8 +71,7 @@ namespace warriorGame
             blocker.health -= 2f; // fighting exhausts, max 50 moves
             if (blocker.health < 0) blocker.health = 0;  // TODO check within Property (performance..)?
 
-            Console.WriteLine("{0} attack={1:0}  {2} block={3:0} damage={4:0}",
-                attacker.name, attack, blocker.name, block, damage);
+            Console.WriteLine("{0} attack={1:0}  {2} block={3:0} damage={4:0}", attacker.name, attack, blocker.name, block, damage);
             Console.WriteLine(blocker.name + " " + blocker.getHealthBar());
         }
 
@@ -61,6 +103,7 @@ namespace warriorGame
             {
                 fighter.Print();
             }
+            Console.WriteLine();
         }
     }
 }

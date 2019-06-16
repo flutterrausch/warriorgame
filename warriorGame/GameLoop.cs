@@ -15,33 +15,25 @@ namespace warriorGame
 		//	3/ output
 		//		. print
 
-		private bool _gameOn;
+		private bool _gameOn = true;
+		private uint round = 1;
 
-
-		public void Start(ref List<Species> fighters)  // TODO fight rounds only, need enclosing game rounds
+		public void Start(ref List<Species> fighters)
 		{
-			List<Species> pair = RndSrc.PairFromList(ref fighters);  // TODO sanity check here (or exception in method)
-			Fight.FightersPrint("upcoming fight pair:", pair);
-
-			_gameOn = true;
-			uint round = 1;
 			while (_gameOn)
 			{
-				Console.WriteLine(NewLine + "round " + round);
+				Console.WriteLine(NewLine + "GAME ROUND " + round);
 
-				_gameOn &= Fight.FightRound(pair);
-				//_gameOn &= Health.RecoverRound(fighters);
+				_gameOn &= Fight.FullFight(ref fighters);
+				_gameOn &= (fighters.Count > 1);
 
-				if (++round > 100)  break;
+				++round;
+				//if (round > 100)  break;
 			}
 
-			Species survivor = Fight.WhoSurvived(pair);
-			if (survivor != null)
-			{
-				survivor.health = 100d;
-				fighters.Add(survivor);
-			}
-			Console.WriteLine(NewLine + "Fight Over, " + Fight.GetSurvivedName(survivor) + " won." + NewLine);
+			Console.WriteLine(NewLine + "GAME OVER, " +
+			                  Fight.GetSurvivedName(Fight.WhoSurvived(fighters)) +  // fighters = last pair TODO bissel heikel
+			                  " is left." + NewLine);
 		}
 	}
 }
