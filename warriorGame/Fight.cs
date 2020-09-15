@@ -68,8 +68,8 @@ namespace warriorGame
         private static void FightOneWay(Species attacker, Species blocker)
         {
             // 30% scatter to players abilities
-            double attack = RndSrc.Vary(attacker.attackMax, 30d, Const.MaxPercent);
-            double block = RndSrc.Vary(blocker.blockMax, 30d, Const.MaxPercent);
+            double attack = RndSrc.Vary(attacker.AttackMax, 30d, Const.MaxPercent);
+            double block = RndSrc.Vary(blocker.BlockMax, 30d, Const.MaxPercent);
             
             // calculate BANG result for blocker
             double damage = attack - block;

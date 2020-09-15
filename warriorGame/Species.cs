@@ -15,7 +15,7 @@ namespace warriorGame
 
 		public void Print()
 		{
-			Console.WriteLine("{0} attackM={1:0} blockM={2:0} health={3:0}", Name, attackMax, blockMax, Health);
+			Console.WriteLine("{0} attackM={1:0} blockM={2:0} health={3:0}", Name, AttackMax, BlockMax, Health);
 		}
 
 		
@@ -37,13 +37,13 @@ namespace warriorGame
 		private double _attackMax;
 		private double _blockMax;
 				
-		public double attackMax
+		public double AttackMax
 		{
 			get { return _attackMax; }
 			protected set { _attackMax = value; }
 		}
 
-		public double blockMax
+		public double BlockMax
 		{
 			get { return _blockMax; }
 			protected set { _blockMax = value; }
