@@ -24,11 +24,10 @@ namespace warriorGame
 
 		public string getHealthBar()
 		{
-			const int total = 30;
-
-			int count = (int) Math.Round(Health * (double) total / Const.MaxPercent);
+			// return a health bar string
+			int count = (int) Math.Round(Health * (double) Const.HealthBarSize / Const.MaxPercent);
 			string bar = "[" + new string('#', count);
-			bar = bar.PadRight(total + 1) + "]";
+			bar = bar.PadRight(Const.HealthBarSize + 1) + "]";
             
 			return bar;
 		}
