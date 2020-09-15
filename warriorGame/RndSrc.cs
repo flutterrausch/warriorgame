@@ -75,7 +75,7 @@ namespace warriorGame
 		{
 			foreach (Species species in list)
 			{
-				Console.WriteLine(species.name);
+				Console.WriteLine(species.Name);
 			}
 			Console.WriteLine();
 		}

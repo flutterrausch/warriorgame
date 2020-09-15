@@ -37,7 +37,7 @@ namespace warriorGame
             Species survivor = WhoSurvived(pair);
             if (survivor != null)
             {
-                survivor.health = Const.MaxPercent;
+                survivor.Health = Const.MaxPercent;
                 fighters.Add(survivor);
             }
             else
@@ -56,12 +56,12 @@ namespace warriorGame
             
             Console.WriteLine(NewLine + "fight round " + fightRound);
             FightOneWay(fighters[0], fighters[1]);
-            if (fighters[0].health > 0d) // fight back only when still alive - attack is the best form of defense
+            if (fighters[0].Health > 0d) // fight back only when still alive - attack is the best form of defense
             {
                 FightOneWay(fighters[1], fighters[0]);
             }
 
-            return (fighters[0].health > 0d && fighters[1].health > 0d); // both survived?
+            return (fighters[0].Health > 0d && fighters[1].Health > 0d); // both survived?
         }
 
         
@@ -74,13 +74,13 @@ namespace warriorGame
             // calculate BANG result for blocker
             double damage = attack - block;
             if (damage < 0) damage = 0; // fighting can only decrease health
-            blocker.health -= damage; // TODO design: write to health  vs  return health (write protected)?
-            blocker.health -= (double) Const.MaxPercent/Const.MaxFightMoves; // each fight move also exhausts = limit moves (both fighters block)
-            if (blocker.health < 0) blocker.health = 0;  // TODO check within Property (performance..)?
+            blocker.Health -= damage; // TODO design: write to health  vs  return health (write protected)?
+            blocker.Health -= (double) Const.MaxPercent/Const.MaxFightMoves; // each fight move also exhausts = limit moves (both fighters block)
+            if (blocker.Health < 0) blocker.Health = 0;  // TODO check within Property (performance..)?
 
             // visualize the result of the attack
-            Console.WriteLine("{0} attack={1:0}  {2} block={3:0} damage={4:0}", attacker.name, attack, blocker.name, block, damage);
-            Console.WriteLine(blocker.name + " " + blocker.getHealthBar());
+            Console.WriteLine("{0} attack={1:0}  {2} block={3:0} damage={4:0}", attacker.Name, attack, blocker.Name, block, damage);
+            Console.WriteLine(blocker.Name + " " + blocker.getHealthBar());
         }
 
         public static Species WhoSurvived(List<Species> fighters)
@@ -88,9 +88,9 @@ namespace warriorGame
             // return who is dead after a fight is over (at least one, end of fightLoop)
             Species ret = null;
 
-            if (fighters[0].health > 0)
+            if (fighters[0].Health > 0)
                 ret = fighters[0];
-            else if (fighters[1].health > 0)
+            else if (fighters[1].Health > 0)
                 ret = fighters[1];
 
             return ret;
@@ -99,7 +99,7 @@ namespace warriorGame
         public static string GetSurvivedName(Species fighter)
         {
             if (fighter != null)
-                return fighter.name;
+                return fighter.Name;
             else
                 return "nobody";
         }

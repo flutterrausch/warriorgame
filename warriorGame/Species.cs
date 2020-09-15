@@ -5,28 +5,28 @@ namespace warriorGame
 	public class Species
 	{
 		/// misc
-		public string name { get; }
+		public string Name { get; }
 
 		protected Species(string nameArg)
 		{
-			name = nameArg;
-			health = Const.MaxPercent;
+			Name = nameArg;
+			Health = Const.MaxPercent;
 		}
 
 		public void Print()
 		{
-			Console.WriteLine("{0} attackM={1:0} blockM={2:0} health={3:0}", name, attackMax, blockMax, health);
+			Console.WriteLine("{0} attackM={1:0} blockM={2:0} health={3:0}", Name, attackMax, blockMax, Health);
 		}
 
 		
 		/// health
-		public double  health { get; set; }  // TODO protected?! Fight class usage..
+		public double  Health { get; set; }  // TODO protected?! Fight class usage..
 
 		public string getHealthBar()
 		{
 			const int total = 30;
 
-			int count = (int) Math.Round(health * (double) total / Const.MaxPercent);
+			int count = (int) Math.Round(Health * (double) total / Const.MaxPercent);
 			string bar = "[" + new string('#', count);
 			bar = bar.PadRight(total + 1) + "]";
             
