@@ -7,10 +7,10 @@ namespace warriorGame
 		/// misc
 		public string name { get; }
 
-		public Species(string nameArg)
+		protected Species(string nameArg)
 		{
 			name = nameArg;
-			health = 100f;
+			health = Const.MaxPercent;
 		}
 
 		public void Print()
@@ -26,7 +26,7 @@ namespace warriorGame
 		{
 			const int total = 30;
 
-			int count = (int) Math.Round(health * (double) total / 100d);
+			int count = (int) Math.Round(health * (double) total / Const.MaxPercent);
 			string bar = "[" + new string('#', count);
 			bar = bar.PadRight(total + 1) + "]";
             

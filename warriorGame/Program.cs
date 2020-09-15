@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace warriorGame
 {
@@ -8,12 +7,14 @@ namespace warriorGame
 		static void Main()
 		{
 			// create fighters
-			List<Species> fighters = new List<Species>();
-			fighters.Add(new Human("h0"));
-			fighters.Add(new Ork("o0"));
-			fighters.Add(new Human("h1"));
-			fighters.Add(new Ork("o1"));
-			
+			List<Species> fighters = new List<Species> {
+				new Human("h0"),
+				new Ork("o0"),
+				new Human("h1"),
+				new Ork("o1")
+			};
+
+			// let the game(s) begin
 			GameLoop gameLoop = new GameLoop();
 			gameLoop.Start(ref fighters);		
 		}

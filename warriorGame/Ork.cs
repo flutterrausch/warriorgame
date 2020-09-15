@@ -4,8 +4,9 @@ namespace warriorGame
 	{
 		public Ork(string _name) : base(_name)
 		{
-			attackMax = RndSrc.Vary(90, 25, 100);
-			blockMax = RndSrc.Vary(70, 25, 100); // give those attacks a chance
+			// attack > block ensures finite battles
+			attackMax = RndSrc.Vary(90d, 25d, Const.MaxPercent);
+			blockMax = RndSrc.Vary(70d, 25d, Const.MaxPercent);
 		}
 	}
 }

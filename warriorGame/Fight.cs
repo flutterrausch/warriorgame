@@ -4,52 +4,47 @@ using System.Collections.Generic;
 
 namespace warriorGame
 {
-    public class Fight
+    // TODO singleton vs static?
+    public static class Fight
     {
         private static uint _fightCnt = 0;
-
-        
-        // utility class, mostly static methods  TODO class not static - good enough?
         
         public static bool FullFight(ref List<Species> fighters)
         {
-            List<Species> pair;
-            Species survivor;
+            List<Species> pair = RndSrc.PairFromList(ref fighters);  // TODO sanity check here (or exception in method)
+            Species survivor = WhoSurvived(pair);
             uint fightRound = 1;
             bool fightOn = true;
-            bool retGameOn = true;
+            bool retHasSurvivor = true;
             
             Console.WriteLine("Fight No " + ++_fightCnt);
             FightersPrint("all fighters:", fighters);
-
-            pair = RndSrc.PairFromList(ref fighters);  // TODO sanity check here (or exception in method)
             FightersPrint("upcoming fight pair:", pair);
 
             while (fightOn)
             {
                 fightOn &= FightRound(pair, fightRound);
-                fightOn &= (++fightRound < 100);
+                fightOn &= (++fightRound < Const.MaxRounds);
                 
-                //fightOn &= Health.RecoverRound(fighters);
+                //fightOn &= Health.RecoverInFight(fighters);
             }
 
-            survivor = WhoSurvived(pair);
             if (survivor != null)
             {
-                survivor.health = 100d;
+                survivor.health = Const.MaxPercent;
                 fighters.Add(survivor);
             }
             else
             {
-                retGameOn = false;
+                retHasSurvivor = false;
             }
             Console.WriteLine(NewLine + "Fight Over, " + GetSurvivedName(survivor) + " won." + NewLine);
             
-            return retGameOn;
+            return retHasSurvivor;
         }
 
-        
-       public static bool FightRound(List<Species> fighters, uint fightRound)
+
+        private static bool FightRound(IReadOnlyList<Species> fighters, uint fightRound) // IReadOnlyList = const List<Species>
         {
             Console.WriteLine(NewLine + "fight round " + fightRound);
             FightOneWay(fighters[0], fighters[1]);
@@ -63,8 +58,8 @@ namespace warriorGame
 
         private static void FightOneWay(Species attacker, Species blocker)
         {
-            double attack = RndSrc.Vary(attacker.attackMax, 30, 100);
-            double block = RndSrc.Vary(blocker.blockMax, 30, 100);
+            double attack = RndSrc.Vary(attacker.attackMax, 30d, Const.MaxPercent);
+            double block = RndSrc.Vary(blocker.blockMax, 30d, Const.MaxPercent);
             double damage = attack - block;
             if (damage < 0) damage = 0; // fighting can only decrease health
             blocker.health -= damage; // TODO design: write to health  vs  return IHealth.health/Human.health (keep health protected?
@@ -96,7 +91,7 @@ namespace warriorGame
                 return "nobody";
         }
 
-        public static void FightersPrint(string title, List<Species> fighters)
+        private static void FightersPrint(string title, List<Species> fighters)
         {
             Console.WriteLine(title);
             foreach (Species fighter in fighters)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace warriorGame
 {
-	public class RndSrc  // TODO static members?
+	public static class RndSrc
 	{
 		private static readonly Random _rnd = new Random();  // TODO Randomize/Constructor?
 
@@ -21,10 +21,10 @@ namespace warriorGame
 			}
 		}
 
-		public static double Vary(double baseVal, int plusMinusPercent, double maxVal)
+		public static double Vary(double baseVal, double plusMinusPercent, double maxVal)
 		{
 			// TODO not formula, base percentage differences on max, IAmTimCorey RND video
-			double diffMax = baseVal * plusMinusPercent/100;
+			double diffMax = baseVal * plusMinusPercent/Const.MaxPercent;
 			double rndVaried = baseVal - diffMax + (double) GetInt(Convert.ToInt32(2*diffMax));  // base +/- rnd(percent)
 			if (rndVaried > maxVal)
 			{
