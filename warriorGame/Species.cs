@@ -19,7 +19,7 @@ namespace warriorGame
 		}
 
 		
-		/// health
+		/// health - property + helper
 		public double  Health { get; set; }  // TODO protected?! Fight class usage..
 
 		public string getHealthBar()
@@ -33,7 +33,7 @@ namespace warriorGame
 		}
 
 		
-		/// fight
+		/// fight - AttackMax + AttackMax properties 
 		private double _attackMax;
 		private double _blockMax;
 				

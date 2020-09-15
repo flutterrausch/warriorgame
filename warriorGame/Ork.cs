@@ -4,6 +4,8 @@ namespace warriorGame
 	{
 		public Ork(string _name) : base(_name)
 		{
+			// orks are a strong species
+
 			// attack > block ensures finite battles
 			AttackMax = RndSrc.Vary(90d, 25d, Const.MaxPercent);
 			BlockMax = RndSrc.Vary(70d, 25d, Const.MaxPercent);
