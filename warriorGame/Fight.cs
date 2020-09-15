@@ -4,15 +4,18 @@ using System.Collections.Generic;
 
 namespace warriorGame
 {
-    // TODO singleton vs static?
-    public static class Fight
+    public static class Fight // TODO singleton vs static?
     {
+        // all things fight: FullFight = N * FightRound = 2 * FightOneWay + some helpers
+
         private static uint _fightCnt = 0;
+        
         
         public static bool FullFight(ref List<Species> fighters)
         {
+            // N rounds of fight until one is dead
+            
             List<Species> pair = RndSrc.PairFromList(ref fighters);  // TODO sanity check here (or exception in method)
-            Species survivor = WhoSurvived(pair);
             uint fightRound = 1;
             bool fightOn = true;
             bool retHasSurvivor = true;
@@ -21,14 +24,17 @@ namespace warriorGame
             FightersPrint("all fighters:", fighters);
             FightersPrint("upcoming fight pair:", pair);
 
+            // fight all necessary rounds
             while (fightOn)
             {
-                fightOn &= FightRound(pair, fightRound);
-                fightOn &= (++fightRound < Const.MaxRounds);
+                fightOn &= FightRound(pair, fightRound); // both survived?
+                fightOn &= (++fightRound < Const.MaxRounds); // MaxRounds?
                 
                 //fightOn &= Health.RecoverInFight(fighters);
             }
 
+            // recover survivor, if any
+            Species survivor = WhoSurvived(pair);
             if (survivor != null)
             {
                 survivor.health = Const.MaxPercent;
@@ -46,35 +52,42 @@ namespace warriorGame
 
         private static bool FightRound(IReadOnlyList<Species> fighters, uint fightRound) // IReadOnlyList = const List<Species>
         {
+            // one round of both-way fight
+            
             Console.WriteLine(NewLine + "fight round " + fightRound);
             FightOneWay(fighters[0], fighters[1]);
-            if (fighters[0].health > 0f) // fight back only when still alive - attack is the best form of defense
+            if (fighters[0].health > 0d) // fight back only when still alive - attack is the best form of defense
             {
                 FightOneWay(fighters[1], fighters[0]);
             }
 
-            return (fighters[0].health > 0f && fighters[1].health > 0f); // both survived?
+            return (fighters[0].health > 0d && fighters[1].health > 0d); // both survived?
         }
 
+        
         private static void FightOneWay(Species attacker, Species blocker)
         {
+            // 30% scatter to players abilities
             double attack = RndSrc.Vary(attacker.attackMax, 30d, Const.MaxPercent);
             double block = RndSrc.Vary(blocker.blockMax, 30d, Const.MaxPercent);
+            
+            // calculate BANG result for blocker
             double damage = attack - block;
             if (damage < 0) damage = 0; // fighting can only decrease health
-            blocker.health -= damage; // TODO design: write to health  vs  return IHealth.health/Human.health (keep health protected?
-            blocker.health -= 2f; // fighting exhausts, max 50 moves
+            blocker.health -= damage; // TODO design: write to health  vs  return health (write protected)?
+            blocker.health -= (double) Const.MaxPercent/Const.MaxFightMoves; // each fight move also exhausts = limit moves (both fighters block)
             if (blocker.health < 0) blocker.health = 0;  // TODO check within Property (performance..)?
 
+            // visualize the result of the attack
             Console.WriteLine("{0} attack={1:0}  {2} block={3:0} damage={4:0}", attacker.name, attack, blocker.name, block, damage);
             Console.WriteLine(blocker.name + " " + blocker.getHealthBar());
         }
 
         public static Species WhoSurvived(List<Species> fighters)
         {
+            // return who is dead after a fight is over (at least one, end of fightLoop)
             Species ret = null;
 
-            // at least one is dead after a fight is over (end of fightLoop)
             if (fighters[0].health > 0)
                 ret = fighters[0];
             else if (fighters[1].health > 0)

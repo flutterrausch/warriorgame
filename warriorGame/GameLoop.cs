@@ -36,6 +36,7 @@ namespace warriorGame
 				if (++_round > Const.MaxRounds)  break;
 			}
 
+			// game over
 			Console.WriteLine(NewLine + "GAME OVER, " +
 			                  Fight.GetSurvivedName(Fight.WhoSurvived(players)) +  // players = last pair, TODO It's a bit risky
 			                  " is left." + NewLine);
