@@ -15,8 +15,7 @@ namespace warriorGame
 			};
 
 			// let the game(s) begin
-			GameLoop gameLoop = new GameLoop();
-			gameLoop.Start(ref fighters);		
+			GameLoop.Run(ref fighters);		
 		}
 	}
 }

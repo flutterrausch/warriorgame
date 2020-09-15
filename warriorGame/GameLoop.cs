@@ -4,7 +4,7 @@ using static System.Environment;
 
 namespace warriorGame
 {
-	public class GameLoop
+	public static class GameLoop
 	{	
 		// Classical Game Loop:
 		//	1/ input
@@ -16,24 +16,24 @@ namespace warriorGame
 		//	3/ output
 		//		- print
 
-		private bool _gameOn = true;
-		private uint _round = 1;
+		private static bool _gameOn = true;
+		private static uint _gameRound = 1;
 
-		public void Start(ref List<Species> players)
+		public static void Run(ref List<Species> players)
 		{
 			while (_gameOn)
 			{
-				Console.WriteLine(NewLine + "GAME ROUND " + _round);
+				Console.WriteLine(NewLine + "GAME ROUND " + _gameRound);
 
 				// fight until decision
 				Fight.FullFight(ref players);
 				// continue game if at least 2 players left
 				_gameOn &= (players.Count > 1);
 
-				//fightOn &= Health.RecoverRound(players);
+				//_gameOn &= Health.RecoverRound(players);
 
 
-				if (++_round > Const.MaxRounds)  break;
+				if (++_gameRound > Const.MaxRounds)  break;
 			}
 
 			// game over
