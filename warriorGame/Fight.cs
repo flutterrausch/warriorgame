@@ -93,7 +93,7 @@ namespace warriorGame
             else if (fighters[1].Health > 0)
                 ret = fighters[1];
 
-            return ret;
+            return ret; // null if nobody is left
         }
 
         public static string GetSurvivedName(Species fighter)

@@ -37,9 +37,11 @@ namespace warriorGame
 			}
 
 			// game over
-			Console.WriteLine(NewLine + "GAME OVER, " +
-			                  Fight.GetSurvivedName(Fight.WhoSurvived(players)) +  // players = last pair, TODO It's a bit risky
-			                  " is left." + NewLine);
+			Console.Write(NewLine + "GAME OVER, ");
+			if (players.Count > 0) // TODO testcase for both dead (sth off in survived())
+				Console.WriteLine(Fight.GetSurvivedName(Fight.WhoSurvived(players)) + " is left." + NewLine);
+			else
+				Console.WriteLine("They all dead." + NewLine);
 		}
 	}
 }
